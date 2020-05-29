@@ -29,6 +29,7 @@
 ESP8266WebServer server;
 WebSocketsServer webSocket = WebSocketsServer(81);
 
+uint8_t pin_led = 12;
 char* ssid = "TP-Link_3F0C";
 char* password = "05205929";
 
@@ -104,7 +105,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
     if(payload[0] == '#'){
       uint16_t brightness = (uint16_t) strtol((const char *) &payload[1], NULL, 10);
       brightness = 1024 - brightness;
-      analogWrite(12, brightness);
+      analogWrite(pin_led, brightness);
       Serial.print("brightness= ");
       Serial.println(brightness);
     }
